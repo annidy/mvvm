@@ -1,0 +1,46 @@
+<html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/databinder.js"></script>
+    <script src="js/jsbinder.js"></script>
+    <script src="js/Compile.js"></script>
+    <script src="js/Observer.js"></script>
+    <script src="js/Watcher.js"></script>
+    <script src="js/MVVM.js"></script>
+    <body>
+
+        <!-- <input type="string" data-bind-123="name" />
+        <input type="string" data-bind-456="name" /> -->
+
+        <span v-text="itext"></span> <!-- 不能简写 />，原因未知 -->
+
+        <div> itext: {{ itext }}  </div>
+        <input v-model="itext"/>
+        <div>
+            wrong
+        </div>
+        <p v-html="htmlStr"></p>
+        <button v-on:click="clickBtn">button1</button>
+
+    </body>
+    <script type="text/javascript">
+    // var user = new User("123")
+    // user.set("name", "Wolf")
+
+    // var jsuser = new JsUser("456")
+    // jsuser.set("name", "Wolf")
+
+
+    var vm = new MVVM({
+        data: {
+            itext: "hello",
+            htmlStr: '<span style="color: #f00;">red</span>'
+        },
+        methods: {
+            clickBtn: function(e) {
+                console.log('clickBtn')
+                this.itext = "click"
+            }
+        },
+    })
+    </script>
+</html>
