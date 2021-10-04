@@ -6,6 +6,7 @@ function MVVM(options) {
     Object.keys(data).forEach(function(key) {
         me._proxy(key)
     })
+    this._initComputed()
     observe(data, this)
     this.$compile = new Compile(options.el || document.body, this)
 }
@@ -23,6 +24,17 @@ MVVM.prototype = {
             set: function (newVal) {
                 me._data[key] = newVal
             }
+        })
+    },
+
+    _initComputed: function() {
+        var me = this;
+        var computed = this.$options.computed;
+        Object.keys(computed).forEach(function(key) {
+            Object.defineProperty(me, key, {
+                get: computed[key],
+                set: function () {}
+            })
         })
     }
 }

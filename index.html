@@ -7,20 +7,19 @@
     <script src="js/Watcher.js"></script>
     <script src="js/MVVM.js"></script>
     <body>
+        <div id="app">
+            <!-- <input type="string" data-bind-123="name" />
+            <input type="string" data-bind-456="name" /> -->
+            <span v-text="now"></span> <!-- 不能简写 />，原因未知 -->
 
-        <!-- <input type="string" data-bind-123="name" />
-        <input type="string" data-bind-456="name" /> -->
-
-        <span v-text="itext"></span> <!-- 不能简写 />，原因未知 -->
-
-        <div> itext: {{ itext }}  </div>
-        <input v-model="itext"/>
-        <div>
-            wrong
+            <div> itext: {{ itext }}  </div>
+            <input v-model="itext"/>
+            <div>
+                wrong
+            </div>
+            <p v-html="htmlStr"></p>
+            <button v-on:click="clickBtn">button1</button>
         </div>
-        <p v-html="htmlStr"></p>
-        <button v-on:click="clickBtn">button1</button>
-
     </body>
     <script type="text/javascript">
     // var user = new User("123")
@@ -31,9 +30,15 @@
 
 
     var vm = new MVVM({
+        el: "#app",
         data: {
             itext: "hello",
             htmlStr: '<span style="color: #f00;">red</span>'
+        },
+        computed: {
+            now: function() {
+                return Date.now()
+            }
         },
         methods: {
             clickBtn: function(e) {

@@ -21,12 +21,13 @@ function defineReactive(data, key, val) {
                 return
             console.log(key, 'has new value', newVal)
             val = newVal
-            dep.notify()
+            dep.notify() // 每次更新值时，通知所有的watcher
         }
     })
 }
 
 function Dep() {
+    // subs 这里是watcher对象
     this.subs = []
 }
 Dep.prototype = {
